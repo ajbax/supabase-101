@@ -23,10 +23,17 @@ results = supabase.table("cars-demo").select("*").execute()
 #         print(f"Car with id: {car['id']} already exists")
 
 ## Updating a record
-new_car = {"id":"3", "created_at":"2025-10-01 13:15:05+00", "make":"chevrolet", "model": "chevelle malibu", "city": "Toronto"}
-supabase.table("cars-demo").update(new_car).eq("city", "Ottawa").execute()
+try:
+    new_car = {"id":"3", "created_at":"2025-10-01 13:15:05+00", "make":"chevrolet", "model": "chevelle malibu", "city": "Toronto"}
+    supabase.table("cars-demo").update(new_car).eq("city", "Ottawa").execute()
+    print("Record updated successfully.")
+except Exception as e:
+    print(f"Error updating record: {e}")
+
 
 ## Deleting a record
 # supabase.table("cars-demo").delete().eq("id", 2).execute()
 
-response = supabase.storage().from_("cars-demo").get_public_url("tesla.png")
+response = supabase.storage.from_('cars-demo').get_public_url('tesla.png')
+
+print(f">> Public URL: {response}")
